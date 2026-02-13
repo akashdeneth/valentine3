@@ -1,163 +1,123 @@
-<style>
-.valentine-container {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff4e8a, #ff9eb5);
-    text-align: center;
-    color: white;
-    padding: 40px 20px;
-    border-radius: 20px;
-}
 
-.valentine-container h1 {
-    font-size: 40px;
+156
+  margin-top: 10px;
+157
+  color: #ffb6c1;
+158
 }
-
-.typing {
-    font-size: 22px;
-    margin-top: 15px;
-    height: 30px;
+159
+​
+160
+/* Flower petals for login */
+161
+.flower {
+162
+  position: fixed;
+163
+  top: -50px;
+164
+  font-size: 20px;
+165
+  color: #ff69b4;
+166
+  animation: fallPetal linear infinite;
+167
+  z-index: 9999;
+168
 }
-
-.btn {
-    margin-top: 25px;
-    padding: 10px 20px;
-    border: none;
-    background: white;
-    color: #ff4e8a;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-.section {
-    margin-top: 60px;
-}
-
-.letter {
-    max-width: 600px;
-    margin: auto;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-.gallery img {
-    width: 180px;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin: 8px;
-}
-
-.countdown {
-    font-size: 24px;
-    margin-top: 15px;
-}
-
-.heart {
-    position: fixed;
-    top: -10px;
-    color: red;
-    font-size: 20px;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(100vh);
-    }
-}
+169
+​
+170
+@keyframes fallPetal { to { transform: translateY(100vh) rotate(360deg); } }
+171
 </style>
-
-<div class="valentine-container">
-
-<h1>Happy Valentine My Love ❤️</h1>
-
+172
+​
+173
+<!-- LOGIN -->
+174
+<div id="login">
+175
+  <h2>Hey Baby Girl 💕</h2>
+176
+  <h3 id="hint">Pass hint - "The sweetest thing I always ask from you 😏💕"</h3> 
+177
+  <input type="password" id="pass" placeholder="Enter password">
+178
+  <button class="btn" onclick="checkPass()">Enter</button>
+179
+</div>
+180
+​
+181
+<!-- INTRO -->
+182
+<div id="intro">
+183
+  <h1>For The Most Beautiful Girl ❤️</h1>
+184
+  <h2 class="name">Jananii......</h2>
+185
+  <p>Something special is loading...</p>
+186
+</div>
+187
+​
+188
+<!-- MAIN -->
+189
+<div id="main">
+190
+​
+191
+<h1>Happy Valentine Day ❤️</h1>
+192
+<div class="name">PRINCESS</div>
+193
 <div class="typing" id="typing"></div>
-
-<button class="btn" onclick="showLetter()">Click For My Love Letter 💌</button>
-
-<div class="section" id="letterSection" style="display:none;">
-    <h2>To My Beautiful Girl ❤️</h2>
+194
+​
+195
+<div class="section">
+196
+  <h2> U & I   .ღ´͈ ᵕ `͈ )♡⃛(´͈ ᵕ `͈ ღ. 📸❤️</h2>
+197
+  <div class="slideshow">
+198
+    <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxmZeZa7DlsWM_QPRfusEYoHuCGi8vRipOnumBncrPrYTwb9lU2OCVCC-HEtbdUrTdjGlf0zJAUEAcIzO5eWFliD9eltQDHkry6-PLRO8jzjANg4XWRYqCoxnAV47eJ8ui_FeDHt6p7-mkh_0HOyFcy_OC09YXlSz3yXgmiJuedIwcWh_kBAxgVI8hZQQ/s320/83cad76b-a43b-456b-b819-cf0e15096b66.JPG"></div>
+199
+    <div class="slide"><img src="https://picsum.photos/400/450?random=2"></div>
+200
+    <div class="slide"><img src="https://picsum.photos/400/450?random=3"></div>
+201
+    <div class="slide"><img src="https://picsum.photos/400/450?random=4"></div>
+202
+  </div>
+203
+</div>
+204
+​
+205
+<div class="section">
+206
+  <button class="btn" onclick="toggleLetter()">Read The Letter 💌</button>
+207
+  <div id="letter" style="display:none;">
+208
     <div class="letter">
-        My love,<br><br>
-        From the day you came into my life, everything became brighter.<br>
-        Your smile is my favorite thing in the world.<br>
-        You are my happiness, my peace, and my forever.<br>
-        I promise to love you more every single day.<br><br>
-        Happy Valentine’s Day, my princess ❤️
+209
+      Sudu 🦋,<br><br>
+210
+      You are my happiness, my peace, my forever.<br>
+211
+      Every second with you feels magical.<br>
+212
+      I am the luckiest person alive because I have you.<br><br>
+213
+      I Love You ʄₒᵣₑᵥₑᵣᨖ. ﾒ૦ ❤️
+214
+     
+215
     </div>
-</div>
-
-<div class="section">
-    <h2>Our Memories 📸</h2>
-    <div class="gallery">
-        <img src="https://picsum.photos/200/250?random=1">
-        <img src="https://picsum.photos/200/250?random=2">
-        <img src="https://picsum.photos/200/250?random=3">
-    </div>
-</div>
-
-<div class="section">
-    <h2>Countdown To Next Valentine 💕</h2>
-    <div class="countdown" id="countdown"></div>
-</div>
-
-<button class="btn" onclick="playMusic()">Play Romantic Music 🎵</button>
-
-<audio id="music" loop="loop">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-</audio>
-
-</div>
-
-<script>
-var text = "You are the best thing that ever happened to me ❤️";
-var i = 0;
-
-function typingEffect() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typingEffect, 60);
-    }
-}
-typingEffect();
-
-function showLetter() {
-    document.getElementById("letterSection").style.display = "block";
-}
-
-var countDate = new Date("Feb 14, 2027 00:00:00").getTime();
-
-setInterval(function() {
-    var now = new Date().getTime();
-    var gap = countDate - now;
-
-    var days = Math.floor(gap / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((gap % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-}, 1000);
-
-function createHeart() {
-    var heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(function() {
-        heart.remove();
-    }, 5000);
-}
-setInterval(createHeart, 300);
-
-function playMusic() {
-    document.getElementById("music").play();
-}
-</script>
+216
+  </div>
