@@ -1,0 +1,163 @@
+<style>
+.valentine-container {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff4e8a, #ff9eb5);
+    text-align: center;
+    color: white;
+    padding: 40px 20px;
+    border-radius: 20px;
+}
+
+.valentine-container h1 {
+    font-size: 40px;
+}
+
+.typing {
+    font-size: 22px;
+    margin-top: 15px;
+    height: 30px;
+}
+
+.btn {
+    margin-top: 25px;
+    padding: 10px 20px;
+    border: none;
+    background: white;
+    color: #ff4e8a;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.section {
+    margin-top: 60px;
+}
+
+.letter {
+    max-width: 600px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.gallery img {
+    width: 180px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 8px;
+}
+
+.countdown {
+    font-size: 24px;
+    margin-top: 15px;
+}
+
+.heart {
+    position: fixed;
+    top: -10px;
+    color: red;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+</style>
+
+<div class="valentine-container">
+
+<h1>Happy Valentine My Love ❤️</h1>
+
+<div class="typing" id="typing"></div>
+
+<button class="btn" onclick="showLetter()">Click For My Love Letter 💌</button>
+
+<div class="section" id="letterSection" style="display:none;">
+    <h2>To My Beautiful Girl ❤️</h2>
+    <div class="letter">
+        My love,<br><br>
+        From the day you came into my life, everything became brighter.<br>
+        Your smile is my favorite thing in the world.<br>
+        You are my happiness, my peace, and my forever.<br>
+        I promise to love you more every single day.<br><br>
+        Happy Valentine’s Day, my princess ❤️
+    </div>
+</div>
+
+<div class="section">
+    <h2>Our Memories 📸</h2>
+    <div class="gallery">
+        <img src="https://picsum.photos/200/250?random=1">
+        <img src="https://picsum.photos/200/250?random=2">
+        <img src="https://picsum.photos/200/250?random=3">
+    </div>
+</div>
+
+<div class="section">
+    <h2>Countdown To Next Valentine 💕</h2>
+    <div class="countdown" id="countdown"></div>
+</div>
+
+<button class="btn" onclick="playMusic()">Play Romantic Music 🎵</button>
+
+<audio id="music" loop="loop">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+</div>
+
+<script>
+var text = "You are the best thing that ever happened to me ❤️";
+var i = 0;
+
+function typingEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typingEffect, 60);
+    }
+}
+typingEffect();
+
+function showLetter() {
+    document.getElementById("letterSection").style.display = "block";
+}
+
+var countDate = new Date("Feb 14, 2027 00:00:00").getTime();
+
+setInterval(function() {
+    var now = new Date().getTime();
+    var gap = countDate - now;
+
+    var days = Math.floor(gap / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((gap % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+}, 1000);
+
+function createHeart() {
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(function() {
+        heart.remove();
+    }, 5000);
+}
+setInterval(createHeart, 300);
+
+function playMusic() {
+    document.getElementById("music").play();
+}
+</script>
