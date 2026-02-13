@@ -1,123 +1,329 @@
+<!-- Add Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-156
-  margin-top: 10px;
-157
-  color: #ffb6c1;
-158
+<style>
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg, #000000, #1a001f, #4b0082, #ff1493);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  cursor: none; /* hide default cursor */
 }
-159
-​
-160
-/* Flower petals for login */
-161
-.flower {
-162
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Intro */
+#intro {
   position: fixed;
-163
-  top: -50px;
-164
-  font-size: 20px;
-165
-  color: #ff69b4;
-166
-  animation: fallPetal linear infinite;
-167
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #1a001f, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   z-index: 9999;
-168
+  animation: fadeOut 6s forwards;
+  animation-delay: 8s;
 }
-169
-​
-170
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+#main { display: none; padding: 40px 20px; }
+
+/* Happy Valentine font */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+  margin: 20px 0;
+  text-shadow: 2px 2px 5px black;
+}
+
+.name {
+  font-size: 50px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4da6, #4b0082, #00c3ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: glow 2s infinite alternate;
+  -webkit-text-stroke: 0px;
+  text-stroke: 0px;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff4da6; }
+  to { text-shadow: 0 0 30px #00c3ff; }
+}
+
+.typing { font-size: 22px; margin-top: 15px; height: 30px; }
+
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #1a001f;
+  color: #ff1493;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.btn:hover { background: #4b0082; color: #00c3ff; }
+
+.section { margin-top: 80px; }
+
+/* Slideshow */
+.slideshow {
+  position: relative;
+  max-width: 400px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.slide { display: none; width: 100%; }
+
+.slide img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Letter */
+.letter {
+  max-width: 600px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.6;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff4da6;
+  animation: fall linear infinite;
+}
+
+@keyframes fall { to { transform: translateY(100vh); } }
+
+/* Login */
+#login {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:10000;
+  overflow: hidden;
+}
+
+input {
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  margin-top:10px;
+  text-align:center;
+  font-size:16px;
+  background: #1a001f;
+  color: #fff;
+}
+
+/* Password hint */
+#hint {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #ffb6c1;
+}
+
+/* Flower petals for login */
+.flower {
+  position: fixed;
+  top: -50px;
+  font-size: 20px;
+  color: #ff69b4;
+  animation: fallPetal linear infinite;
+  z-index: 9999;
+}
+
 @keyframes fallPetal { to { transform: translateY(100vh) rotate(360deg); } }
-171
 </style>
-172
-​
-173
+
 <!-- LOGIN -->
-174
 <div id="login">
-175
   <h2>Hey Baby Girl 💕</h2>
-176
   <h3 id="hint">Pass hint - "The sweetest thing I always ask from you 😏💕"</h3> 
-177
   <input type="password" id="pass" placeholder="Enter password">
-178
   <button class="btn" onclick="checkPass()">Enter</button>
-179
 </div>
-180
-​
-181
+
 <!-- INTRO -->
-182
 <div id="intro">
-183
   <h1>For The Most Beautiful Girl ❤️</h1>
-184
   <h2 class="name">Jananii......</h2>
-185
   <p>Something special is loading...</p>
-186
 </div>
-187
-​
-188
+
 <!-- MAIN -->
-189
 <div id="main">
-190
-​
-191
+
 <h1>Happy Valentine Day ❤️</h1>
-192
 <div class="name">PRINCESS</div>
-193
 <div class="typing" id="typing"></div>
-194
-​
-195
+
 <div class="section">
-196
   <h2> U & I   .ღ´͈ ᵕ `͈ )♡⃛(´͈ ᵕ `͈ ღ. 📸❤️</h2>
-197
   <div class="slideshow">
-198
     <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxmZeZa7DlsWM_QPRfusEYoHuCGi8vRipOnumBncrPrYTwb9lU2OCVCC-HEtbdUrTdjGlf0zJAUEAcIzO5eWFliD9eltQDHkry6-PLRO8jzjANg4XWRYqCoxnAV47eJ8ui_FeDHt6p7-mkh_0HOyFcy_OC09YXlSz3yXgmiJuedIwcWh_kBAxgVI8hZQQ/s320/83cad76b-a43b-456b-b819-cf0e15096b66.JPG"></div>
-199
     <div class="slide"><img src="https://picsum.photos/400/450?random=2"></div>
-200
     <div class="slide"><img src="https://picsum.photos/400/450?random=3"></div>
-201
     <div class="slide"><img src="https://picsum.photos/400/450?random=4"></div>
-202
   </div>
-203
 </div>
-204
-​
-205
+
 <div class="section">
-206
   <button class="btn" onclick="toggleLetter()">Read The Letter 💌</button>
-207
   <div id="letter" style="display:none;">
-208
     <div class="letter">
-209
       Sudu 🦋,<br><br>
-210
       You are my happiness, my peace, my forever.<br>
-211
       Every second with you feels magical.<br>
-212
       I am the luckiest person alive because I have you.<br><br>
-213
       I Love You ʄₒᵣₑᵥₑᵣᨖ. ﾒ૦ ❤️
-214
      
-215
     </div>
-216
   </div>
+</div>
+
+<button class="btn" onclick="toggleMusic()"> Music 🎵</button>
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+</div>
+
+<script>
+/* ENTER key login */
+document.getElementById("pass").addEventListener("keypress", function(e){
+  if(e.key==="Enter"){ checkPass(); }
+});
+
+function checkPass(){
+  if(document.getElementById("pass").value==="umma"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("main").style.display="block";
+  } else { alert("Wrong password 😢"); }
+}
+
+/* Typing effect */
+var text="You are the best thing that ever happened to me ❤️";
+var i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,60);
+  }
+}
+setTimeout(type,4000);
+
+/* Letter toggle */
+function toggleLetter(){
+  var letter = document.getElementById("letter");
+  if(letter.style.display==="none"){
+    letter.style.display="block";
+    letter.scrollIntoView({behavior:"smooth"});
+  } else {
+    letter.style.display="none";
+  }
+}
+
+/* Floating hearts */
+function createHeart(){
+  var heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  heart.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(heart);
+  setTimeout(function(){heart.remove();},5000);
+}
+setInterval(createHeart,300);
+
+/* Flower petals on login page */
+function createFlower(){
+  var flower=document.createElement("div");
+  flower.className="flower";
+  flower.innerHTML="🌸";
+  flower.style.left=Math.random()*100+"vw";
+  flower.style.fontSize=(Math.random()*20+10)+"px";
+  flower.style.animationDuration=(Math.random()*4+3)+"s";
+  document.getElementById("login").appendChild(flower);
+  setTimeout(function(){flower.remove();},6000);
+}
+setInterval(createFlower,400);
+
+/* Music toggle */
+function toggleMusic(){
+  var music = document.getElementById("music");
+  if(music.paused){ music.play(); }
+  else{ music.pause(); }
+}
+
+/* Auto Slideshow */
+var slideIndex=0;
+showSlides();
+function showSlides(){
+  var slides=document.getElementsByClassName("slide");
+  for(var i=0;i<slides.length;i++){ slides[i].style.display="none"; }
+  slideIndex++;
+  if(slideIndex>slides.length){ slideIndex=1; }
+  slides[slideIndex-1].style.display="block";
+  setTimeout(showSlides,3000);
+}
+
+/* Custom cursor with 4 switching images */
+var cursorImages = [
+  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrQVPCyEfoBNH1zX54CAwX4lOdWnx3uS8d_-uVIvadn2sjsD5OKDUwijQMmlJcbWikaDbxq-WRJ59JtQi6-ffmHAiKBbyQV7dkeyg3eLgMQMlrTjkK7MzcHuZNEdNHBquyCSVznCN9QpkSPlhhCzW5QMkn_xri8ONOG8otrfShob249cIq8DX59zChZ9U/s320/Gemini_Generated_Image_6lmukx6lmukx6lmu__4_-removebg-preview.png",
+  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjEMQjELETlQHpU_rSoHPVkzBiklAblJtp-icIZ3MDbRbCGlt9yRtRWL9mERF9W4z0u0Z0u7f6C482P-FU-k1ABYSrHkT-ORze_eh-PXahKg_D8_g_SIhen3BfEQrqOoqIANulL9buUJX9Zqca1DWmePTPnKvqo0QNlI8ABUmour0CL_GXMSrkAec9yq8/s320/Gemini_Generated_Image_6lmukx6lmukx6lmu__3_-removebg-preview.png",
+  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTpRud_akDKe0jmqVLUsl33eYNwm1SK0pW3haRqyQCJSuOwsPbvgR0Jw7KD7yYjaM4enSQ8qMdeaVrD4hwnw7oxjX16UC_t3Uuwu65JTsUX2kzuEFBxfgl5Gvw_faQTE_cS-JRK6isr8bxE8D_DdxoNrR45L3o5HB7JlaVI44fV74mLTZXC9WT-HjnOuE/s320/Gemini_Generated_Image_6lmukx6lmukx6lmu__2_-removebg-preview.png",
+  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMGQUOUQ1l0PY2OCvHQuK4dw_vt7vn7bDoIaZ7pJd_TtE8evlAAfrwblbyMXX4AV1MeTTHsHhi20UQiHksSQoB-X60cCBWwuX_mTguvdsk_sSZGutDzEvzzcY992jiAIAO-gf8cWx2tu1Po5Dm18ENDJCuocaV05AJBHRR0FPWkjjADR3xuVfur47XQmg/s320/Gemini_Generated_Image_6lmukx6lmukx6lmu__1_-removebg-preview.png"
+];
+
+var cursorImg = document.createElement("img");
+cursorImg.style.position = "fixed";
+cursorImg.style.width = "40px";
+cursorImg.style.height = "40px";
+cursorImg.style.pointerEvents = "none";
+cursorImg.style.zIndex = "100000";
+cursorImg.style.transform = "translate(-80%, -80%)";
+document.body.appendChild(cursorImg);
+
+document.addEventListener("mousemove", function(e){
+  var randomIndex = Math.floor(Math.random() * cursorImages.length);
+  cursorImg.src = cursorImages[randomIndex];
+  cursorImg.style.left = e.clientX + "px";
+  cursorImg.style.top = e.clientY + "px";
+});
+</script>
