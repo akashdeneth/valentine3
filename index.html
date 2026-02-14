@@ -1,4 +1,11 @@
-<!-- Add Google Font -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Surprise</title>
+
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
@@ -13,7 +20,7 @@ body {
   background: linear-gradient(-45deg, #000000, #1a001f, #4b0082, #ff1493);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  cursor: none; /* hide default cursor */
+  cursor: none;
 }
 
 @keyframes gradientBG {
@@ -59,8 +66,6 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   animation: glow 2s infinite alternate;
-  -webkit-text-stroke: 0px;
-  text-stroke: 0px;
 }
 
 @keyframes glow {
@@ -139,6 +144,20 @@ h1 {
   overflow: hidden;
 }
 
+/* Kiss rain for video popup */
+.kiss {
+  position: absolute;
+  top: -20px;
+  font-size: 25px;
+  animation: kissFall linear infinite;
+  pointer-events: none;
+  z-index: 30000;
+}
+
+@keyframes kissFall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
+
 input {
   padding:10px;
   border-radius:20px;
@@ -168,7 +187,22 @@ input {
 }
 
 @keyframes fallPetal { to { transform: translateY(100vh) rotate(360deg); } }
+
+#surprisePopup {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:20000;
+  overflow:hidden;
+}
 </style>
+</head>
+<body>
 
 <!-- LOGIN -->
 <div id="login">
@@ -193,12 +227,10 @@ input {
 <div class="typing" id="typing"></div>
 
 <div class="section">
-  <h2> U & I   .ღ´͈ ᵕ `͈ )♡⃛(´͈ ᵕ `͈ ღ. 📸❤️</h2>
+  <h2>U & I .ღ´͈ ᵕ `͈ )♡⃛(´͈ ᵕ `͈ ღ. 📸❤️</h2>
   <div class="slideshow">
-    <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxmZeZa7DlsWM_QPRfusEYoHuCGi8vRipOnumBncrPrYTwb9lU2OCVCC-HEtbdUrTdjGlf0zJAUEAcIzO5eWFliD9eltQDHkry6-PLRO8jzjANg4XWRYqCoxnAV47eJ8ui_FeDHt6p7-mkh_0HOyFcy_OC09YXlSz3yXgmiJuedIwcWh_kBAxgVI8hZQQ/s320/83cad76b-a43b-456b-b819-cf0e15096b66.JPG"></div>
-    <div class="slide"><img src="https://picsum.photos/400/450?random=2"></div>
-    <div class="slide"><img src="https://picsum.photos/400/450?random=3"></div>
-    <div class="slide"><img src="https://picsum.photos/400/450?random=4"></div>
+    <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilu5Gv2MBuAo8gnn1CA9AGFp2c9gqnicx7I6KARFovqkFh6ktTVg58u_jmcK7-b-bC7omrbVG2zYa4PSgkv84BYEhUOcdgL3TT4XqqF3HDplQyN_PoYib_5QeekWc3fgbtG6AsFNXPRZImdFfHQV-4aUoGUrYl75cIhaGETvIi5fHXJ500gzA2jRYsSZs/s320/7773AD66-4160-4AD4-8F60-C3AF8FC8E01D.JPEG"></div>
+    
   </div>
 </div>
 
@@ -207,19 +239,39 @@ input {
   <div id="letter" style="display:none;">
     <div class="letter">
       Sudu 🦋,<br><br>
-      You are my happiness, my peace, my forever.<br>
+      You are my happiness, my peace, my cutiepie.<br>
       Every second with you feels magical.<br>
       I am the luckiest person alive because I have you.<br><br>
       I Love You ʄₒᵣₑᵥₑᵣᨖ. ﾒ૦ ❤️
-     
     </div>
   </div>
 </div>
 
-<button class="btn" onclick="toggleMusic()"> Music 🎵</button>
-<audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-</audio>
+<div class="section">
+  <button class="btn" onclick="openSurprise()">Surprise 💖</button>
+</div>
+
+<!-- Surprise Popup -->
+<div id="surprisePopup">
+  <!-- Streamable Embed -->
+  <iframe src="https://streamable.com/e/76t5ue" 
+          width="80%" 
+          height="450" 
+          frameborder="0" 
+          scrolling="no" 
+          allowfullscreen>
+  </iframe>
+
+  <button class="btn" onclick="closeSurprise()" style="margin-top:20px; z-index:20001;">
+    Close 💔
+  </button>
+</div>
+
+<div class="section">
+  <button class="btn" onclick="toggleMusic()">Music 🎵</button>
+  <audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+  </audio>
 </div>
 
 <script>
@@ -258,6 +310,34 @@ function toggleLetter(){
   }
 }
 
+/* Surprise 💖 Kisses */
+let kissInterval;
+
+function createKiss(){
+  var kiss=document.createElement("div");
+  kiss.className="kiss";
+  kiss.innerHTML="💋";
+  kiss.style.left=Math.random()*100+"vw";
+  kiss.style.fontSize=(Math.random()*25+15)+"px";
+  kiss.style.animationDuration=(Math.random()*4+3)+"s";
+  document.getElementById("surprisePopup").appendChild(kiss);
+  setTimeout(()=>kiss.remove(),7000);
+}
+
+function startKisses(){ kissInterval=setInterval(createKiss,200); }
+function stopKisses(){ clearInterval(kissInterval); document.querySelectorAll(".kiss").forEach(e=>e.remove()); }
+
+/* Open/Close Surprise Popup */
+function openSurprise(){ 
+  document.getElementById("surprisePopup").style.display="flex"; 
+  startKisses();
+}
+
+function closeSurprise(){ 
+  document.getElementById("surprisePopup").style.display="none"; 
+  stopKisses();
+}
+
 /* Floating hearts */
 function createHeart(){
   var heart=document.createElement("div");
@@ -267,7 +347,7 @@ function createHeart(){
   heart.style.fontSize=(Math.random()*20+10)+"px";
   heart.style.animationDuration=(Math.random()*3+2)+"s";
   document.body.appendChild(heart);
-  setTimeout(function(){heart.remove();},5000);
+  setTimeout(()=>heart.remove(),5000);
 }
 setInterval(createHeart,300);
 
@@ -280,7 +360,7 @@ function createFlower(){
   flower.style.fontSize=(Math.random()*20+10)+"px";
   flower.style.animationDuration=(Math.random()*4+3)+"s";
   document.getElementById("login").appendChild(flower);
-  setTimeout(function(){flower.remove();},6000);
+  setTimeout(()=>flower.remove(),6000);
 }
 setInterval(createFlower,400);
 
@@ -293,7 +373,6 @@ function toggleMusic(){
 
 /* Auto Slideshow */
 var slideIndex=0;
-showSlides();
 function showSlides(){
   var slides=document.getElementsByClassName("slide");
   for(var i=0;i<slides.length;i++){ slides[i].style.display="none"; }
@@ -302,6 +381,7 @@ function showSlides(){
   slides[slideIndex-1].style.display="block";
   setTimeout(showSlides,3000);
 }
+showSlides();
 
 /* Custom cursor with 4 switching images */
 var cursorImages = [
@@ -327,3 +407,5 @@ document.addEventListener("mousemove", function(e){
   cursorImg.style.top = e.clientY + "px";
 });
 </script>
+</body>
+</html>
